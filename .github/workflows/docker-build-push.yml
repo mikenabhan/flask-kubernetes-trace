@@ -12,6 +12,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Set date
+      run: echo "DATE_TAG=$(date +"%Y-%m-%d")" >> $GITHUB_ENV
+
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
 
@@ -33,4 +36,4 @@ jobs:
         push: true
         tags: |
           ghcr.io/${{ github.repository_owner }}/flask-kubernetes-trace:latest
-          ghcr.io/${{ github.repository_owner }}/flask-kubernetes-trace:$(date +"%Y-%m-%d")
+          ghcr.io/${{ github.repository_owner }}/flask-kubernetes-trace:${{env.DATE_TAG}}
